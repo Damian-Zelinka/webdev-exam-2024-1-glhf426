@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alza/cart</title>
+    <link rel="stylesheet" href="CSS/cart.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 id="company-name">Alza</h1>
+            <div id="flex_box">
+                <div class="box_item"><a class="btn" href="index.html" draggable="false">Home</a></div>
+                <div class="box_item"><a class="btn" id="active-btn" href="#" draggable="false">Корзина</a></div>
+                <div class="box_item"><a class="btn" href="manageOrders.html" draggable="false">Личный кабинет</a></div>
+                <div id="searchbar-input-main-container">
+                    <div class= "navbar-search-container">
+                        <input type="text" class= "navbar-search-input" id="search-input" placeholder='Введите запрос'/>
+                        <button class= "navbar-search-btn" id="search-btn"><img class="search-icon" src= "images/search.svg" alt="" draggable="false"/></button>
+                    </div>
+                    <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2 id="combo-h2">Состав заказа</h2>
+        <div id="none-chosen-div">
+            <p id="none-chosen">Корзина пуста. Перейдите в <a href="index.html" id="orders-a">каталог</a>, чтобы добавить товары. </p>
+        </div>
+        <div class="menu-item-container" id="order-container"></div>
+
+
+
+        <form action="https://httpbin.org/post" method="post" id="food-form">
+            <fieldset id="make-order-fieldset">
+                <legend id="make-order-legend">Оформление заказа</legend>
+
+                <div id="make-order-grid">
+
+                    <div id="customer-order">
+
+                        <div class="data-input">
+                            <label for="input-name">Имя</label>
+                            <input type="text" class="input-field" id="input-name" name="full_name" required>
+                        </div>
+
+                        <div class="data-input">
+                            <label for="input-phone">Номер телефона</label>
+                            <input type="text" class="input-field" id="input-phone" name="phone" required>
+                        </div>
+
+                        <div class="data-input">
+                            <label for="input-email">Email</label>
+                            <input type="email" class="input-field" id="input-email" name="email" required>
+                        </div>
+
+
+                        <input type="checkbox" id="newsletter" name="subscribe" value= "1" checked>
+                        <label for="newsletter">Получать информацию <br>о скидках и  акциах</label>
+
+                        <div id="comments">
+                            <label for="comments-textarea">Комментарии к заказу</label>
+                            <textarea id="comments-textarea" name="comment"></textarea>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div id="customer-data">
+
+                        <div class="data-input">
+                            <label for="input-address">Адрес доставки</label>
+                            <input type="text" class="input-field" id="input-address" name="delivery_address" required>
+                        </div>
+
+                        <div class="data-input">
+                            <label for="input-date">Дата доставки</label>
+                            <input type="date" class="input-field" id="input-date" name="delivery_date" required>
+                        </div>
+
+                        <div class="data-input">
+                            <label for="input-time">Укажите время доставки</label>
+                            <select id="input-time" class="input-field" name="delivery_interval">
+                                <option value="08:00-12:00">08:00 - 12:00</option>
+                                <option value="12:00-14:00">12:00 - 14:00</option>
+                                <option value="14:00-18:00">14:00 - 18:00</option>
+                                <option value="18:00-22:00">18:00 - 22:00</option>
+                            </select>
+                        </div>
+
+                        <div class="hidden selected-food" id="final-price">Стоимость заказа</div>
+                        <div class="hidden" id="final-price-value"></div>
+
+                        <!-- <input type="hidden" id="hidden-array" name="good_ids"> -->
+
+                        <div class="buttons">
+                            <button class="form-btn" type="reset" id="reset-btn">Сбросить</button>
+                            <input class="form-btn" type="submit" id="submit-btn" value="Отправить">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+
+        <div id="overlay"></div>
+    </main>
+
+
+
+    <footer id="footer_id">
+        <div>
+            <p id="footer_p">Позвонить нам <a href="#" class="contact">+7 (000)-000-00-00</a></p>
+        </div>
+    </footer>
+
+
+    <script src="JavaScript/loadOrder.js"></script>
+    <script src="JavaScript/submitForm.js"></script>
+</body>
+</html>

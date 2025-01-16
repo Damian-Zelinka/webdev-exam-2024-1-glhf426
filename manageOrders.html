@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="CSS/manageOrders.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 id="company-name">Alza</h1>
+            <div id="flex_box">
+                <div class="box_item"><a class="btn" href="index.html" draggable="false">Home</a></div>
+                <div class="box_item"><a class="btn" href="cart.html" draggable="false">Корзина</a></div>
+                <div class="box_item"><a class="btn" id="active-btn" href="#" draggable="false">Личный кабинет</a></div>
+                <div id="searchbar-input-main-container">
+                    <div class= "navbar-search-container">
+                        <input type="text" class= "navbar-search-input" id="search-input" placeholder='Введите запрос'/>
+                        <button class= "navbar-search-btn" id="search-btn"><img class="search-icon" src= "images/search.svg" alt="" draggable="false"/></button>
+                    </div>
+                    <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main id="main">
+        <div id="main-div">
+            <h2>История заказов</h2>
+            <span class="line-span"></span>
+            <div class="orders-item">
+                <p class="orders-number orders-text-bold">№</p>
+                <p class="orders-date orders-text-bold">Дата оформления</p>
+                <p class="orders-content orders-text-bold">Состав заказа</p>
+                <p class="orders-price orders-text-bold">Стоимость</p>
+                <p class="orders-time orders-text-bold">Доставка</p>
+                <p class="orders-actions orders-text-bold">Действия</p>
+            </div>
+            <span class="line-span"></span>
+        </div>
+        
+
+
+
+        <div id="loading-div">
+            <span class="loading__anim"></span>
+        </div>
+
+        <div id="view-alert-div">
+            <div id="view-alert-sub-div-1">
+                <p id="view-alert-main-text">Просмотр заказа</p>
+                <img id="create-sub-1-x" src="./images/pngfind.com-x-png-1320307.png" alt="">
+            </div>
+
+            <span class="line-span"></span>
+
+            <div id="view-alert-sub-div-2">
+                <div class="parent">
+                    <div id="div1">Дата оформления</div>
+                    <div id="div2"></div>
+                    <div id="div3" class="bold-text">Доставка</div>
+                    <div id="div4">Имя получателя</div>
+                    <div id="div5"></div>
+                    <div id="div6">Адрес доставки</div>
+                    <div id="div7"></div>
+                    <div id="div8">Время доставки</div>
+                    <div id="div9"></div>
+                    <div id="div10">Телефон</div>
+                    <div id="div11"></div>
+                    <div id="div12">Email</div>
+                    <div id="div13"> </div>
+                    <div id="div14" class="bold-text">Комментарий</div>
+                    <div id="div15"></div>
+                    <div id="div16" class="bold-text">Состав заказа</div>
+                    <div id="div17">Суп</div>
+                    <div id="div18"></div>
+                    <div id="div19">Основное блюдо</div>
+                    <div id="div20"></div>
+                    <div id="div21">Напиток</div>
+                    <div id="div22"></div>
+                    <div id="div23">Салат</div>
+                    <div id="div24"></div>
+                    <div id="div25">Десерт</div>
+                    <div id="div26"></div>
+                    <div id="div27" class="view-price"></div>
+                    </div>
+            </div>
+
+            <span class="line-span"></span>
+        </div>
+
+
+        <div id="overlay"></div>
+    </main>
+
+    <footer id="footer_id">
+        <div>
+            <p id="footer_p">Позвонить нам <a href="#" class="contact">+7 (000)-000-00-00</a></p>
+        </div>
+    </footer>
+
+
+    <!-- scripts -->
+
+    <script src="JavaScript/manageOrders.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Alza</title>
+        <link rel="stylesheet" href="CSS/main.css">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar">
+                <h1 id="company-name">Alza</h1>
+                <div id="flex_box">
+                    <div class="box_item"><a class="btn" id="active-btn" href="#" draggable="false">Home</a></div>
+                    <div class="box_item"><a class="btn" href="cart.html" draggable="false">Корзина</a></div>
+                    <div class="box_item"><a class="btn" href="manageOrders.html" draggable="false">Личный кабинет</a></div>
+                    <div id="searchbar-input-main-container">
+                        <div class= "navbar-search-container">
+                            <input type="text" class= "navbar-search-input" id="search-input" placeholder='Введите запрос'/>
+                            <button class= "navbar-search-btn" id="search-btn"><img class="search-icon" src= "images/search.svg" alt="" draggable="false"/></button>
+                        </div>
+                        <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+
+            <div id="notification-div">
+                <p id="notification-text"></p>
+                <button id="notification-btn"><img id="notification-btn-image" src= "images/x-lg.svg" alt="" draggable="false"/></button>
+            </div>
+
+
+            <div id="main-content-div">
+                <div id="main-content-sidebar">
+                    <div>
+                        <h3 class="sidebar-h3">Категории</h3>
+                        <div id="sidebar-input-div">
+                            <label class="sidebar-input">
+                                <input type="checkbox" name="option1" value="option1">
+                                Option 1
+                            </label>
+                            <label class="sidebar-input">
+                                <input type="checkbox" name="option2" value="option2">
+                                Option 2
+                            </label>
+                            <label class="sidebar-input">
+                                <input type="checkbox" name="option3" value="option3">
+                                Option 3
+                            </label>
+                            <label class="sidebar-input">
+                                <input type="checkbox" name="option4" value="option4">
+                                Option 4
+                            </label>
+                            <label class="sidebar-input">
+                                <input type="checkbox" name="option5" value="option5">
+                                Option 5
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="sidebar-h3">Стоимость</h3>
+                        <div id="price-filter">
+                            <div class="price-range">
+                                <label for="min-price">От</label>
+                                <input type="number" id="min-price" value="100" step="50" min="0">
+                            </div>
+                            <div class="price-range">
+                                <label for="max-price">До</label>
+                                <input type="number" id="max-price" value="5000" step="50" min="0">
+                            </div>
+                            <div class="discount-checkbox">
+                                <label>
+                                    <input type="checkbox" id="discount-only">
+                                    Только товары со скидками
+                                </label>
+                            </div>
+                            <button id="apply-btn">Применить</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="main-content-container">
+                    <div id="catalog-div">
+                        <h2 id="catalog-h2">Каталог</h2>
+                        <div class="dropdown" id="sortDropdown">
+                            <select>
+                                <option value="rating-desc">По убыванию рейтинга</option>
+                                <option value="rating-asc">По возрастанию рейтинга</option>
+                                <option value="price-desc">По убыванию цены</option>
+                                <option value="price-asc">По возрастанию цены</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                <div id="main-content-items-div">
+                    <!-- <div class="item">
+                        <div class="item-image"><img src="images/tea.jpg" alt=""></div>
+                        <h3 class="item-name">Название товара</h3>
+                        <div class="item-stars-div">
+                            <p class="item-stars-p">4.1</p>
+                        </div>
+                        <div class="item-price-div">
+                            <p class="item-price">2000$</p>
+                            <p class="item-price-discount">3000$</p>
+                            <p class="item-discount">-33%</p>
+                        </div>
+                        <button class="add-to-cart-btn">Добавить</button>
+                    </div> -->
+                </div>
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+        </main>
+
+
+
+
+        <footer id="footer_id">
+            <div>
+                <p id="footer_p">Позвонить нам <a href="#" class="contact">+7 (000)-000-00-00</a></p>
+
+            </div>
+
+
+        </footer>
+
+
+
+
+        <script src="JavaScript/fetchItems.js"></script>
+        <script src="JavaScript/sortItems.js"></script>
+        <script src="JavaScript/autocomplete.js"></script>
+    </body>
+
+
+</html>
