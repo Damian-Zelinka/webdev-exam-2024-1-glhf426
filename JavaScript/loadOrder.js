@@ -59,6 +59,33 @@ function createItem(item) {
     const starsDiv = document.createElement('div');
     starsDiv.className = 'item-stars-div';
 
+    const starsImg = document.createElement('img');
+    starsImg.className = 'item-stars-img';
+
+    if (0 < item.rating < 0.3) {
+        starsImg.src = "./images/stars_0.png";
+    } else if (0.3 <= item.rating && item.rating < 0.7) {
+        starsImg.src = "./images/stars_05.png";
+    } else if (0.7 <= item.rating && item.rating < 1.3) {
+        starsImg.src = "./images/stars_1.png";
+    } else if (1.3 <= item.rating && item.rating < 1.7) {
+        starsImg.src = "./images/stars_15.png";
+    } else if (1.7 <= item.rating && item.rating < 2.3) {
+        starsImg.src = "./images/stars_2.png";
+    } else if (2.3 <= item.rating && item.rating < 2.7) {
+        starsImg.src = "./images/stars_25.png";
+    } else if (2.7 <= item.rating && item.rating < 3.3) {
+        starsImg.src = "./images/stars_3.png";
+    } else if (3.3 <= item.rating && item.rating < 3.7) {
+        starsImg.src = "./images/stars_35.png";
+    } else if (3.7 <= item.rating && item.rating < 4.3) {
+        starsImg.src = "./images/stars_4.png";
+    } else if (4.3 <= item.rating && item.rating < 4.7) {
+        starsImg.src = "./images/stars_45.png";
+    } else {
+        starsImg.src = "./images/stars_5.png";
+    };
+
     const starsP = document.createElement('p');
     starsP.className = 'item-stars-p';
     starsP.textContent = item.rating;
@@ -106,6 +133,7 @@ function createItem(item) {
     card.appendChild(imgDiv);
     card.appendChild(name);
     starsDiv.appendChild(starsP);
+    starsDiv.appendChild(starsImg);
     card.appendChild(starsDiv);
 
     card.appendChild(priceDiv);
@@ -142,6 +170,8 @@ async function loadFromLocalStorage() {
 };
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadFromLocalStorage();
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadFromLocalStorage();
+    document.getElementById('loading-div').style.display = 'none';
+    document.getElementById('mainDiv').style.display = 'block';
 });

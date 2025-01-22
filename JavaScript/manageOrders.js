@@ -1,10 +1,13 @@
-const mainDiv = document.getElementById('main-div');
+const mainDiv = document.getElementById('main-div-deletable');
 let ordersData = {};
 let dishesData = {};
+let goods = [];
 let price = 0;
+
 
 async function calculatePrice(array) {
     price = 0;
+    console.log(array);
     const ids = array;
     if (ids.length === 0) {
         console.log('No IDs found in localStorage.');
@@ -12,11 +15,22 @@ async function calculatePrice(array) {
     }
 
     for (const id of ids) {
-        const card = document.querySelector(`[data-id="${id}"]`);
-        price += parseInt(card.dataset.price, 10);
+        for (const response of dishesData) {
+            if (response.id == id) {
+                if (response.discount_price != null) {
+                    price += parseInt(response.discount_price, 10);
+                } else {
+                    price += parseInt(response.actual_price, 10);
+                }
+                goods.push(response.name);
+            }
+        }
     }
-    priceDiv.textContent = `${price}₽`;
 };
+
+
+/////////////////////////////////////////////////////////////////////////////
+
 
 async function loadAllOrders() {
 
@@ -29,42 +43,51 @@ async function loadAllOrders() {
     let counter = 1;
 
     for (const order of ordersData) {
-            
-        // let dishNames = [];
-        // let price = 0;
-
-
-        // let dishes = '';
-        // dishNames.forEach((dish) => {
-        //     dishes += `${dish}, `;
-        // });
-        // dishes = dishes.substring(0, dishes.length - 2);
-        
-
-        // ///////////// take care of time variable
-        // const createdAt = order.created_at;
-        // const date = new Date(createdAt);
-
-        // const day = String(date.getDate()).padStart(2, '0');
-        // const month = String(date.getMonth() + 1).padStart(2, '0');
-        // const year = date.getFullYear();
-        // const hours = String(date.getHours()).padStart(2, '0');
-        // const minutes = String(date.getMinutes()).padStart(2, '0');
-
-        // const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}`;
-
-
-        ///////////// creating each order element and inserting it
-
+        goods = [];
         calculatePrice(order.good_ids);
 
+        ///////////// take care of time variable
+        const time = order.delivery_interval;
+        const deliveryDate = order.delivery_date;
+        const date = new Date(deliveryDate);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        // const hours = String(date.getHours()).padStart(2, '0');
+        // const minutes = String(date.getMinutes()).padStart(2, '0');
+        const formattedDate = `${day}.${month}.${year}`;
 
+        //take care of creation date time
+
+        function formatDateTime(createdDateTime) {
+            const date = new Date(createdDateTime);
+        
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+            const year = date.getFullYear();
+        
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+        
+            return `${day}.${month}.${year}, ${hours}:${minutes}:${seconds}`;
+        }
+    
+        const formattedDateTime = formatDateTime(order.created_at);
+
+        const dateTime = `${formattedDate}\n${time}`;
+        console.log(dateTime);
+        let goodsNames = goods.join(' ;\n');
+        goodsNames = goodsNames.substring(0, goodsNames.length - 2);
+        console.log(goodsNames);
         const orderDiv = document.createElement('div');
         const orderNumber = document.createElement('p');
         const orderDate = document.createElement('p');
         const orderContent = document.createElement('p');
         const orderPrice = document.createElement('p');
         const orderTime = document.createElement('p');
+        orderTime.innerText = dateTime;
+        orderTime.className = 'orders-date-time';
         const orderAction = document.createElement('div');
         const span = document.createElement('span');
 
@@ -74,7 +97,7 @@ async function loadAllOrders() {
         eye.src = "./images/eye.svg";
         eye.setAttribute('data-order', counter);
         eye.setAttribute('data-price', price);
-        eye.addEventListener('click', (event) => createViewAlert(event));
+        eye.addEventListener('click', (event) => createViewAlert(event, formattedDate, formattedDateTime, price, goodsNames));
 
         const pen = document.createElement('img');
         pen.id = 'edit-btn';
@@ -82,6 +105,7 @@ async function loadAllOrders() {
         pen.src = "./images/pencil-square.svg";
         pen.setAttribute('data-order', counter);
         pen.setAttribute('data-price', price);
+        pen.addEventListener('click', (event) => createEditAlert(event, formattedDate, formattedDateTime, price, goodsNames));
 
         const trash = document.createElement('img');
         trash.id = 'delete-btn';
@@ -99,24 +123,14 @@ async function loadAllOrders() {
         orderNumber.textContent = counter;
         orderNumber.className = 'orders-number';
 
-        orderDate.textContent = order.delivery_date;
+        orderDate.textContent = formattedDateTime;
         orderDate.className = 'orders-date';
 
-        // orderContent.textContent = dishes;
+        orderContent.innerText = goodsNames;
         orderContent.className = 'orders-content';
 
         orderPrice.textContent = `${price}ք`;
         orderPrice.className = 'orders-price';
-
-        // if (order.delivery_type == 'now') {
-        //     orderTime.textContent = 'Как можно скорее (с 07:00 до 23:00)';
-        //     orderTime.className = 'orders-time';
-        // } else {
-        //     let deliveryTime = order.delivery_time;
-        //     let updatedDeliveryTime = deliveryTime.substring(0, deliveryTime.length - 3);
-        //     orderTime.textContent = updatedDeliveryTime;
-        //     orderTime.className = 'orders-time';
-        // }
 
         orderAction.className = 'icons-div';
         
@@ -128,9 +142,9 @@ async function loadAllOrders() {
 
         orderDiv.appendChild(orderNumber);
         orderDiv.appendChild(orderDate);
-        // orderDiv.appendChild(orderContent);
+        orderDiv.appendChild(orderContent);
         orderDiv.appendChild(orderPrice);
-        // orderDiv.appendChild(orderTime);
+        orderDiv.appendChild(orderTime);
         orderDiv.appendChild(orderAction);
         
         mainDiv.appendChild(orderDiv);

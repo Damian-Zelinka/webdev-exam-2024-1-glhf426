@@ -2,6 +2,21 @@ const form = document.getElementById('food-form');
 
 const checkbox = document.getElementById('newsletter');
 
+const dateInput = document.getElementById('input-date');
+
+// Get today's date
+const today = new Date();
+
+// Calculate tomorrow's date
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+// Format the date as "YYYY-MM-DD" for the min attribute
+const formattedDate = tomorrow.toISOString().split('T')[0];
+
+dateInput.setAttribute('min', formattedDate);
+
+
 // Listen for the change event
 checkbox.addEventListener('change', () => {
     const value = checkbox.checked ? 1 : 0;
@@ -50,5 +65,10 @@ form.addEventListener('submit', function(event) {
             console.log('sent');
             console.log(response);
         });
-        
+    showMessage('Order created successfully! You will be redirected back to store.');
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('overlay').style.backgroundColor = 'transparent';
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 5000);
 });

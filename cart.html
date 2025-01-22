@@ -26,92 +26,102 @@
         </nav>
     </header>
 
+    <div id="loading-div">
+        <span class="loading__anim"></span>
+    </div>
+
     <main>
-        <h2 id="combo-h2">Состав заказа</h2>
-        <div id="none-chosen-div">
-            <p id="none-chosen">Корзина пуста. Перейдите в <a href="index.html" id="orders-a">каталог</a>, чтобы добавить товары. </p>
+        <div id="notification-main-div">
+            <div id="notification-div">
+                <p id="notification-text"></p>
+                <button id="notification-btn"><img id="notification-btn-image" src= "images/x-lg.svg" alt="" draggable="false"/></button>
+            </div>
         </div>
-        <div class="menu-item-container" id="order-container"></div>
+
+        <div id="mainDiv">
+            <h2 id="combo-h2">Состав заказа</h2>
+            <div id="none-chosen-div">
+                <p id="none-chosen">Корзина пуста. Перейдите в <a href="index.html" id="orders-a">каталог</a>, чтобы добавить товары. </p>
+            </div>
+            <div class="menu-item-container" id="order-container"></div>
 
 
 
-        <form action="https://httpbin.org/post" method="post" id="food-form">
-            <fieldset id="make-order-fieldset">
-                <legend id="make-order-legend">Оформление заказа</legend>
+            <form action="https://httpbin.org/post" method="post" id="food-form">
+                <fieldset id="make-order-fieldset">
+                    <legend id="make-order-legend">Оформление заказа</legend>
 
-                <div id="make-order-grid">
+                    <div id="make-order-grid">
 
-                    <div id="customer-order">
+                        <div id="customer-order">
 
-                        <div class="data-input">
-                            <label for="input-name">Имя</label>
-                            <input type="text" class="input-field" id="input-name" name="full_name" required>
+                            <div class="data-input">
+                                <label for="input-name">Имя</label>
+                                <input type="text" class="input-field" id="input-name" name="full_name" required>
+                            </div>
+
+                            <div class="data-input">
+                                <label for="input-phone">Номер телефона</label>
+                                <input type="text" class="input-field" id="input-phone" name="phone" required>
+                            </div>
+
+                            <div class="data-input">
+                                <label for="input-email">Email</label>
+                                <input type="email" class="input-field" id="input-email" name="email" required>
+                            </div>
+
+
+                            <input type="checkbox" id="newsletter" name="subscribe" value= "1" checked>
+                            <label for="newsletter">Получать информацию <br>о скидках и  акциах</label>
+
+                            <div id="comments">
+                                <label for="comments-textarea">Комментарии к заказу</label>
+                                <textarea id="comments-textarea" name="comment"></textarea>
+                            </div>
+
+
                         </div>
 
-                        <div class="data-input">
-                            <label for="input-phone">Номер телефона</label>
-                            <input type="text" class="input-field" id="input-phone" name="phone" required>
+
+
+
+
+
+
+                        <div id="customer-data">
+
+                            <div class="data-input">
+                                <label for="input-address">Адрес доставки</label>
+                                <input type="text" class="input-field" id="input-address" name="delivery_address" required>
+                            </div>
+
+                            <div class="data-input">
+                                <label for="input-date">Дата доставки</label>
+                                <input type="date" class="input-field" id="input-date" name="delivery_date" required>
+                            </div>
+
+                            <div class="data-input">
+                                <label for="input-time">Укажите время доставки</label>
+                                <select id="input-time" class="input-field" name="delivery_interval">
+                                    <option value="08:00-12:00">08:00 - 12:00</option>
+                                    <option value="12:00-14:00">12:00 - 14:00</option>
+                                    <option value="14:00-18:00">14:00 - 18:00</option>
+                                    <option value="18:00-22:00">18:00 - 22:00</option>
+                                </select>
+                            </div>
+
+                            <div class="hidden selected-food" id="final-price">Стоимость заказа</div>
+                            <div class="hidden" id="final-price-value"></div>
+
+                            <div class="buttons">
+                                <button class="form-btn" type="reset" id="reset-btn">Сбросить</button>
+                                <input class="form-btn" type="submit" id="submit-btn" value="Отправить">
+                            </div>
                         </div>
-
-                        <div class="data-input">
-                            <label for="input-email">Email</label>
-                            <input type="email" class="input-field" id="input-email" name="email" required>
-                        </div>
-
-
-                        <input type="checkbox" id="newsletter" name="subscribe" value= "1" checked>
-                        <label for="newsletter">Получать информацию <br>о скидках и  акциах</label>
-
-                        <div id="comments">
-                            <label for="comments-textarea">Комментарии к заказу</label>
-                            <textarea id="comments-textarea" name="comment"></textarea>
-                        </div>
-
-
                     </div>
-
-
-
-
-
-
-
-                    <div id="customer-data">
-
-                        <div class="data-input">
-                            <label for="input-address">Адрес доставки</label>
-                            <input type="text" class="input-field" id="input-address" name="delivery_address" required>
-                        </div>
-
-                        <div class="data-input">
-                            <label for="input-date">Дата доставки</label>
-                            <input type="date" class="input-field" id="input-date" name="delivery_date" required>
-                        </div>
-
-                        <div class="data-input">
-                            <label for="input-time">Укажите время доставки</label>
-                            <select id="input-time" class="input-field" name="delivery_interval">
-                                <option value="08:00-12:00">08:00 - 12:00</option>
-                                <option value="12:00-14:00">12:00 - 14:00</option>
-                                <option value="14:00-18:00">14:00 - 18:00</option>
-                                <option value="18:00-22:00">18:00 - 22:00</option>
-                            </select>
-                        </div>
-
-                        <div class="hidden selected-food" id="final-price">Стоимость заказа</div>
-                        <div class="hidden" id="final-price-value"></div>
-
-                        <!-- <input type="hidden" id="hidden-array" name="good_ids"> -->
-
-                        <div class="buttons">
-                            <button class="form-btn" type="reset" id="reset-btn">Сбросить</button>
-                            <input class="form-btn" type="submit" id="submit-btn" value="Отправить">
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-
+                </fieldset>
+            </form>
+        </div>
 
         <div id="overlay"></div>
     </main>
@@ -127,5 +137,6 @@
 
     <script src="JavaScript/loadOrder.js"></script>
     <script src="JavaScript/submitForm.js"></script>
+    <script src="JavaScript/message.js"></script>
 </body>
 </html>
