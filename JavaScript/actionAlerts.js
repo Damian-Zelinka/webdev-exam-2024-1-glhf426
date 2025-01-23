@@ -235,7 +235,6 @@ function createEditAlert(event, date, created_at, price, items) {
     };
 
 
-
     function addToFormData(key, value) {
         if (formData.has(key)) {
             formData.set(key, value);
@@ -243,8 +242,6 @@ function createEditAlert(event, date, created_at, price, items) {
             formData.append(key, value);
         }
     };
-
-    //create inputs
 
     nameInput = document.createElement('input');
     nameInput.type = 'text';

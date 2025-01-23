@@ -16,8 +16,6 @@ function processIdsFromLocalStorage() {
         console.log('No IDs found in localStorage.');
         return;
     }
-
-    // Iterate over the array and perform actions
     ids.forEach(id => {
         console.log(`Processing ID: ${id}`);
 
@@ -178,9 +176,14 @@ function createItem(item) {
 
 
 function displayItems() { //toto nam loaduje itemy
+
     fetch('https://edu.std-900.ist.mospolytech.ru/exam-2024-1/api/goods?api_key=a8b02171-a483-48cd-9b9e-4f91c00e3043')
         .then(response => response.json())
         .then(data => {
+            if (data.error) {
+                showMessage(data.error);
+            }
+            // console.log(data.error);
             const sortedItems = data.sort((a, b) => {
 
                 return a.name.localeCompare(b.name);
@@ -190,9 +193,6 @@ function displayItems() { //toto nam loaduje itemy
 
             items.forEach(item => {
                 createItem(item);
-
-
-                // button.addEventListener('click', () => checkForCombo());
             });
         })
         .finally(() => {

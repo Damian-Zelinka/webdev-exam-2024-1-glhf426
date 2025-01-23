@@ -135,7 +135,6 @@ function createItem(item) {
     starsDiv.appendChild(starsP);
     starsDiv.appendChild(starsImg);
     card.appendChild(starsDiv);
-
     card.appendChild(priceDiv);
     card.appendChild(button);
 
@@ -157,11 +156,16 @@ async function loadFromLocalStorage() {
             const response = await fetch(
                 `https://edu.std-900.ist.mospolytech.ru/exam-2024-1/api/goods/${id}?api_key=a8b02171-a483-48cd-9b9e-4f91c00e3043`
             );
-            const data = await response.json();
-            selectedGoods.push(data);
+            if (!response.ok) {
+                throw new Error(`Ошибка сервера: ${response.status}`);
+            } else {
+                const data = await response.json();
+                selectedGoods.push(data);
+            }
         } catch (error) {
-            console.error(`Error fetching data for ID ${id}:`, error);
-        }
+            showMessage(error.message || 'Произошла ошибка. Попробуйте ещё раз.');
+            return;
+        };
     }
     selectedGoods.forEach(item => {
         createItem(item);
